@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-01-05T00:00:00+00:00",
+  "source": "mock",
+  "user": "demo_user",
+  "period_days": 7,
+  "tracks": [
+    {
+      "played_at_uts": 1736035200,
+      "played_at_iso": "2026-01-05T00:00:00+00:00",
+      "track_name": "Midnight Drive",
+      "artist_name": "Demo Artist",
+      "album_name": "Demo Album",
+      "track_mbid": "",
+      "track_url": "https://www.last.fm/music/Demo+Artist/_/Midnight+Drive"
+    },
+    {
+      "played_at_uts": 1736038800,
+      "played_at_iso": "2026-01-05T01:00:00+00:00",
+      "track_name": "Soft Lights",
+      "artist_name": "Demo Artist",
+      "album_name": "Demo Album",
+      "track_mbid": "",
+      "track_url": "https://www.last.fm/music/Demo+Artist/_/Soft+Lights"
+    },
+    {
+      "played_at_uts": 1736042400,
+      "played_at_iso": "2026-01-05T02:00:00+00:00",
+      "track_name": "Rainy Mood",
+      "artist_name": "Another Demo",
+      "album_name": "Gray Days",
+      "track_mbid": "",
+      "track_url": "https://www.last.fm/music/Another+Demo/_/Rainy+Mood"
+    },
+    {
+      "played_at_uts": 1736121600,
+      "played_at_iso": "2026-01-06T00:00:00+00:00",
+      "track_name": "High Energy",
+      "artist_name": "Party Demo",
+      "album_name": "Weekend",
+      "track_mbid": "",
+      "track_url": "https://www.last.fm/music/Party+Demo/_/High+Energy"
+    },
+    {
+      "played_at_uts": 1736208000,
+      "played_at_iso": "2026-01-07T00:00:00+00:00",
+      "track_name": "Late Night Talk",
+      "artist_name": "Chill Demo",
+      "album_name": "After Hours",
+      "track_mbid": "",
+      "track_url": "https://www.last.fm/music/Chill+Demo/_/Late+Night+Talk"
+    }
+  ]
+}
