@@ -82,77 +82,117 @@ Week 1 只要做到這三件事就算成功：
 
 ---
 
-## 極簡 I/O 合約（新手版，只留必要欄位）
+## 極簡 I/O 合約（新手版，只留必要欄位）【Last.fm 版】
 
 ### 先釘住一個觀念（很重要）
-
-我們 `out/` 內的檔案格式是**我們自己定的乾淨格式**，不等於 Last.fm API 原始回傳。
-原因：Last.fm 回傳資料巢狀、欄位有時會缺（例如 now playing 可能沒有時間），直接用會很容易踩雷。
+我們 `out/` 內的檔案格式是**我們自己定的乾淨格式**，不等於 Last.fm API 原始回傳。  
+原因：Last.fm 回傳資料巢狀、欄位可能缺（例如 now playing 可能沒有時間），直接用會很容易踩雷。  
 所以：
 
-* A 的工作：把 Last.fm 原始回傳「整理成我們的格式」
-* B/C 的規則：只讀 `out/` 的乾淨欄位，不需要研究 API 結構
-* `raw/`：只給 A 放原始回傳用來 debug，B/C 不讀、也不依賴
+- **A 的工作**：把 Last.fm 原始回傳「整理成我們的格式」
+- **B/C 的規則**：只讀 `out/` 的乾淨欄位，不需要研究 API 結構
+- **raw/**：只給 A 放原始回傳用來 debug，B/C 不讀、也不依賴
 
 ---
 
-### A → B：`out/week_data.json`
+## A → B：`out/week_data.json`
 
-A 的 `fetch.py` 要產出 `out/week_data.json`，至少包含：
+### A 的 `fetch.py` 要產出 `out/week_data.json`，至少包含：
+- `user.username`
+- `range.from_ts`、`range.to_ts`
+- `scrobbles[]` 每筆至少有：
+  - `ts`（UTC timestamp int）
+  - `artist`（string）
+  - `track`（string）
+  - `tags`（list[string]，**永遠非空**）
 
-* `user.username`
-* `range.from_ts`、`range.to_ts`
-* `scrobbles[]` 每筆至少有：
+---
 
-  * `ts`（UTC timestamp int）
-  * `artist`（string）
-  * `track`（string）
-
-#### 欄位映射（A 照這個做，不要猜）
-
+## 欄位映射（A 照這個做，不要猜）
 從 Last.fm `user.getRecentTracks` 的每筆 track，整理成我們的 `scrobbles[]`：
 
-* `ts` ← `track.date.uts`
-  如果沒有 `date.uts`，通常是 now playing，那筆直接跳過
-* `artist` ← `track.artist.#text`（最後一定要整理成字串）
-* `track` ← `track.name`
-* （可選）`album` ← `track.album.#text`（沒有就空字串）
-* （可選）`url` ← `track.url`（沒有就空字串）
+- `ts` ← `track.date.uts`  
+  - 如果沒有 `date.uts`，通常是 now playing，那筆**直接跳過**
+- `artist` ← `track.artist.#text`（最後一定要整理成字串）
+- `track` ← `track.name`
+- `tags` ← 由 A 額外抓（見下一段 Tags 規則）
 
-#### raw/ Debug 規則（可選但推薦）
-
-* A 可以把原始回傳存一份到 `raw/recent_tracks_raw.json` 方便對照
-* 但 B/C 永遠只讀 `out/week_data.json` 的 `scrobbles[]`
+（可選）  
+- `album` ← `track.album.#text`（沒有就空字串）  
+- `url` ← `track.url`（沒有就空字串）
 
 ---
 
-### B → C：`out/summary.csv`（只有 1 行）
+## Tags 規則（非常重要，新手最常踩雷）
+### 1) `tags` 永遠非空
+A 會依序嘗試抓 tags（對同一首歌先去重再抓）：
 
+1. `track.getTopTags`（歌曲 tags）  
+2. 抓不到則用 `artist.getTopTags`（歌手 tags）  
+3. 再抓不到則補上 `["untagged"]` 作為保底
+
+因此 `scrobbles[].tags` **永遠是非空 list**。
+
+### 2) `["untagged"]` 是本地保底（不是 Last.fm 提供）
+- `["untagged"]` 不是 Last.fm 原生標籤  
+- 作用是：讓資料格式穩定、避免分析流程因空 tags 爆掉  
+- **B 做心情/風格分析時必須排除 `["untagged"]`**
+
+---
+
+## raw/ Debug 規則（可選但推薦）
+A 可以把原始回傳存一份到 `raw/lastfm_recenttracks.json` 方便對照  
+但 B/C 永遠只讀 `out/week_data.json` 的 `scrobbles[]`
+
+---
+
+## B → C：`out/summary.csv`（只有 1 行）
 B 的 `analyze.py` 要產出 `out/summary.csv`，至少包含欄位：
+- `username`
+- `scrobble_count`
+- `top_artist`
+- `top_track`
+- `real_tag_coverage`（新增，**很重要**）
 
-* `username`
-* `scrobble_count`
-* `top_artist`
-* `top_track`
+### real_tag_coverage 計算規則
+- `real_tag_coverage = (tags != ["untagged"] 的播放數) / (總播放數)`
+- 用來告訴大家：心情分析有多少比例是真的基於 tags
 
 ---
 
-### B → C：`out/top_tracks.csv`（多行）
-
+## B → C：`out/top_tracks.csv`（多行）
 B 的 `analyze.py` 要產出 `out/top_tracks.csv`，至少包含欄位：
+- `rank`（1,2,3…）
+- `artist`
+- `track`
+- `play_count`
 
-* `rank`（1,2,3…）
-* `artist`
-* `track`
-* `play_count`
+（可選加分欄位，不強制）
+- `tags_preview`（例如把前 3 個 tags 用 `|` 串起來，方便報告呈現）
 
 ---
 
 ## 平行開工規則（不互等）
+- C 不需要等 A/B：先用 `sample/*.csv` 做 UI
+- B 不需要等 A：也可以先用 sample 檔寫統計流程
+- A 做出真實 `out/week_data.json` 後，再讓 B/C 切換讀 `out/`
 
-* C 不需要等 A/B：先用 `sample/*.csv` 做 UI
-* B 不需要等 A：也可以先用 sample 檔寫統計流程
-* A 做出真實 `out/week_data.json` 後，再讓 B/C 切換讀 out/
+---
+
+## 上傳/不上傳規則（避免出事）
+### ❌ 這些不要上傳 GitHub
+- `.env`（API key/帳號）
+- `raw/`（原始回應、tags 快取）
+- `out/`（個人聽歌資料）
+- `.venv/`（虛擬環境）
+
+### ✅ 這些要上傳 GitHub（團隊共同開發）
+- `fetch.py / analyze.py / app.py`
+- `sample/`
+- `README.md`
+- `requirements.txt`
+- `.gitignore`
+
 
 ---
 
