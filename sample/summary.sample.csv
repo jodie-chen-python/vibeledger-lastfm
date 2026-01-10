@@ -1,2 +1,2 @@
-username,scrobble_count,top_artist,top_track
-demo_user,42,Radiohead,Karma Police
+username,scrobble_count,top_artist,top_track,real_tag_coverage
+sample_user,12,Radiohead,"Radiohead - Weird Fishes/Arpeggi",0.9167
