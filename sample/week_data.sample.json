@@ -1,53 +1,81 @@
 {
-  "generated_at": "2026-01-05T00:00:00+00:00",
-  "source": "mock",
-  "user": "demo_user",
-  "period_days": 7,
-  "tracks": [
+  "user": { "username": "sample_user" },
+  "range": {
+    "from_ts": 1767440000,
+    "to_ts": 1768044800
+  },
+  "scrobbles": [
     {
-      "played_at_uts": 1736035200,
-      "played_at_iso": "2026-01-05T00:00:00+00:00",
-      "track_name": "Midnight Drive",
-      "artist_name": "Demo Artist",
-      "album_name": "Demo Album",
-      "track_mbid": "",
-      "track_url": "https://www.last.fm/music/Demo+Artist/_/Midnight+Drive"
+      "ts": 1768041200,
+      "artist": "Radiohead",
+      "track": "Weird Fishes/Arpeggi",
+      "tags": ["alternative", "indie", "rock"]
     },
     {
-      "played_at_uts": 1736038800,
-      "played_at_iso": "2026-01-05T01:00:00+00:00",
-      "track_name": "Soft Lights",
-      "artist_name": "Demo Artist",
-      "album_name": "Demo Album",
-      "track_mbid": "",
-      "track_url": "https://www.last.fm/music/Demo+Artist/_/Soft+Lights"
+      "ts": 1768037600,
+      "artist": "Radiohead",
+      "track": "Weird Fishes/Arpeggi",
+      "tags": ["alternative", "indie", "rock"]
     },
     {
-      "played_at_uts": 1736042400,
-      "played_at_iso": "2026-01-05T02:00:00+00:00",
-      "track_name": "Rainy Mood",
-      "artist_name": "Another Demo",
-      "album_name": "Gray Days",
-      "track_mbid": "",
-      "track_url": "https://www.last.fm/music/Another+Demo/_/Rainy+Mood"
+      "ts": 1768034000,
+      "artist": "Phoebe Bridgers",
+      "track": "Kyoto",
+      "tags": ["indie", "singer-songwriter", "alternative"]
     },
     {
-      "played_at_uts": 1736121600,
-      "played_at_iso": "2026-01-06T00:00:00+00:00",
-      "track_name": "High Energy",
-      "artist_name": "Party Demo",
-      "album_name": "Weekend",
-      "track_mbid": "",
-      "track_url": "https://www.last.fm/music/Party+Demo/_/High+Energy"
+      "ts": 1768030400,
+      "artist": "Daft Punk",
+      "track": "One More Time",
+      "tags": ["electronic", "dance", "house"]
     },
     {
-      "played_at_uts": 1736208000,
-      "played_at_iso": "2026-01-07T00:00:00+00:00",
-      "track_name": "Late Night Talk",
-      "artist_name": "Chill Demo",
-      "album_name": "After Hours",
-      "track_mbid": "",
-      "track_url": "https://www.last.fm/music/Chill+Demo/_/Late+Night+Talk"
+      "ts": 1768026800,
+      "artist": "Daft Punk",
+      "track": "One More Time",
+      "tags": ["electronic", "dance", "house"]
+    },
+    {
+      "ts": 1768023200,
+      "artist": "Billie Eilish",
+      "track": "everything i wanted",
+      "tags": ["pop", "sad", "electropop"]
+    },
+    {
+      "ts": 1768019600,
+      "artist": "Joy Division",
+      "track": "Love Will Tear Us Apart",
+      "tags": ["post-punk", "80s", "alternative"]
+    },
+    {
+      "ts": 1768016000,
+      "artist": "NewJeans",
+      "track": "Super Shy",
+      "tags": ["k-pop", "pop", "dance"]
+    },
+    {
+      "ts": 1768012400,
+      "artist": "Unknown Artist",
+      "track": "Mystery Track",
+      "tags": ["untagged"]
+    },
+    {
+      "ts": 1768008800,
+      "artist": "Nujabes",
+      "track": "Feather",
+      "tags": ["lo-fi", "hip-hop", "chill"]
+    },
+    {
+      "ts": 1768005200,
+      "artist": "Nujabes",
+      "track": "Feather",
+      "tags": ["lo-fi", "hip-hop", "chill"]
+    },
+    {
+      "ts": 1768001600,
+      "artist": "Taylor Swift",
+      "track": "Anti-Hero",
+      "tags": ["pop", "synthpop", "catchy"]
     }
   ]
 }
