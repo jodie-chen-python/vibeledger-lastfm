@@ -1,17 +1,16 @@
-# VibeLedger｜歌單心電圖（Last.fm）｜新手 MVP
+# VibeLedger｜歌單心電圖（Last.fm）
 
 我們做一個「個人歌單週報」：
 輸入 Last.fm 帳號（或使用 sample 資料），抓近 7 天收聽紀錄，產出本週摘要與排行榜，最後用 Streamlit 做成可 Demo 的簡單儀表板。
 
 ---
 
-## 專案分工（3 人就能跑）
+## 專案分工
 
 * A｜Fetcher：抓資料 → 產出 `out/week_data.json`
 * B｜Analyzer：算摘要/排行 → 產出 `out/summary.csv`、`out/top_tracks.csv`
 * C｜Reporter：做 Streamlit → 讀 `out/summary.csv`、`out/top_tracks.csv`
 
-主揪：整合 repo、維護規格、確保大家跑得起來。
 
 ---
 
@@ -72,7 +71,7 @@ streamlit run app.py
 
 ---
 
-## Week 1 最小目標（新手版本）
+## Week 1 最小目標
 
 Week 1 只要做到這三件事就算成功：
 
@@ -167,8 +166,93 @@ B 的 `analyze.py` 要產出 `out/top_tracks.csv`，至少包含欄位：
 - `track`
 - `play_count`
 
-（可選加分欄位，不強制）
-- `tags_preview`（例如把前 3 個 tags 用 `|` 串起來，方便報告呈現）
+## top_tracks.csv 的 tags_preview 欄位（給 C 做報告更方便）
+
+`tags_preview` 不是 Last.fm 原生欄位，也不是 `week_data.json` 的必填欄位。  
+它是 **B 在輸出 `out/top_tracks.csv` 時自行組合的「顯示用欄位」**，讓 C 不用再回頭讀 JSON 就能在報告上呈現這首歌的 vibe。
+
+### 來源
+- 來自 `week_data.json` 的 `scrobbles[].tags`（list[string]）
+
+### 生成規則（建議）
+- 若 `tags == ["untagged"]` → `tags_preview = "untagged"`
+- 否則 → 取前 3 個 tags，用 `|` 串起來  
+  - `tags_preview = "|".join(tags[:3])`
+
+### 範例
+- `tags = ["alternative", "indie", "rock", "britpop"]`
+- `tags_preview = "alternative|indie|rock"`
+
+---
+
+### C 要做什麼
+把 B 產出的 CSV 做成「可看得懂的週報」。
+（先做最簡單版本：一頁 Streamlit 或一個 report.html 都可以）
+
+---
+
+### C 的輸入（Input）
+C **只讀 out/ 的乾淨檔案**，不用研究 Last.fm API。
+
+**優先讀：**
+- `out/summary.csv`
+- `out/top_tracks.csv`
+
+**如果 out/ 還沒產出（A/B 尚未跑完），就改讀 sample：**
+- `sample/summary.sample.csv`
+- `sample/top_tracks.sample.csv`
+
+> 讀取規則（務必寫進程式）：  
+> 有 `out/*.csv` 就讀 out；沒有就讀 `sample/*.sample.csv`
+
+---
+
+### out/summary.csv（只有 1 行）
+至少包含這些欄位（欄位名固定）：
+
+- `username`：本週分析的帳號
+- `scrobble_count`：近 7 天總播放次數（= scrobbles 筆數）
+- `top_artist`：本週播放最多的 artist（以播放次數計）
+- `top_track`：本週播放最多的 track（以播放次數計）
+- `tags_preview`：本週常見 tag 預覽（字串；用 `|` 分隔）
+  - 來源：B 從 `week_data.json` 的 `tags[]` 統計出來
+  - 注意：`untagged` 是我們本機 fallback（不是 Last.fm 回傳）
+
+---
+
+### out/top_tracks.csv（多行）
+至少包含這些欄位（欄位名固定）：
+
+- `rank`：1,2,3...
+- `artist`
+- `track`
+- `play_count`
+- `tags_preview`（可選但建議）：該曲常見 tag（字串；用 `|` 分隔）
+  - 沒有也沒關係，C 先照欄位存在就顯示、不存在就略過即可
+
+---
+
+### C 的輸出（Output）
+最少要交付其中一種：
+
+**方案 1｜Streamlit（推薦）**
+- `app.py`：執行後可看到頁面（不用輸出檔案也可）
+  - 顯示區塊建議：
+    1) 本週摘要（username / scrobble_count / top_artist / top_track）
+    2) Top Tracks 表格（前 10 名）
+    3) tags_preview（本週 tag 預覽）
+
+**方案 2｜HTML 報告（可選）**
+- `out/report.html`
+  - 同樣三區塊：Summary / Top Tracks / Tags Preview
+
+---
+
+### C 的範圍（避免踩雷）
+- C 不要讀 `raw/`（那是 A debug 用）
+- C 不要依賴 `.env` / API key
+- 只要吃得到 CSV，就能完成 UI
+
 
 ---
 
