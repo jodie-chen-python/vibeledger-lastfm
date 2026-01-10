@@ -1,11 +1,10 @@
-rank,artist,track,play_count
-1,Radiohead,Karma Police,5
-2,The Cure,Just Like Heaven,4
-3,Arctic Monkeys,Do I Wanna Know?,4
-4,Phoebe Bridgers,Motion Sickness,3
-5,Tame Impala,The Less I Know The Better,3
-6,Slowdive,When the Sun Hits,2
-7,Beach House,Space Song,2
-8,HAIM,The Wire,2
-9,Paramore,Hard Times,2
-10,Lorde,Ribs,2
+rank,artist,track,play_count,tags_preview
+1,Radiohead,Weird Fishes/Arpeggi,2,alternative|indie|rock
+2,Daft Punk,One More Time,2,electronic|dance|house
+3,Nujabes,Feather,2,lo-fi|hip-hop|chill
+4,Phoebe Bridgers,Kyoto,1,indie|singer-songwriter|alternative
+5,Billie Eilish,everything i wanted,1,pop|sad|electropop
+6,Joy Division,Love Will Tear Us Apart,1,post-punk|80s|alternative
+7,NewJeans,Super Shy,1,k-pop|pop|dance
+8,Unknown Artist,Mystery Track,1,untagged
+9,Taylor Swift,Anti-Hero,1,pop|synthpop|catchy
