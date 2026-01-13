@@ -105,7 +105,7 @@ user = jsonObj['user']["username"]
 scrobblecnt = len(jsonObj['scrobbles'])
 scrobble_info = jsonObj['scrobbles']
 print(type(scrobble_info)) # list, 但是裡面裝的元素是dic
-print(scrobble_info)
+# print(scrobble_info)
 
 from collections import Counter
 # 單純取出所有 artist
@@ -118,15 +118,14 @@ track_list = [item["track"] for item in jsonObj["scrobbles"]]
 track_counter = Counter(track_list)
 top_track = track_counter.most_common(1)[0][0]
 
-print(user, scrobblecnt, top_artist, top_track)
-print(scrobble_info)
+# print(user, scrobblecnt, top_artist, top_track)
+# print(scrobble_info)
 
 
 # part2 -- top_tracks.sample.csv
-
 import pandas as pd
 df = pd.DataFrame(scrobble_info)
-print(df)
+# print(df)
 track_count = (df
 .groupby(["artist", "track"])
 .size()
@@ -142,7 +141,7 @@ track_count["ranking"] = range(1, len(track_count) + 1)
 result_df = track_count[
 ["ranking", "track", "artist", "play_count"]]
 
-print(result_df)
+# print(result_df)
 
 
 
@@ -151,7 +150,7 @@ print(result_df)
 import csv 
 
 # 開啟檔案
-with open("sum.csv", mode="w", newline="",encoding="utf-8-sig") as file: #newline="" 才不會在寫入時出現不該出現的東西。
+with open("out/summary.csv", mode="w", newline="",encoding="utf-8-sig") as file: #newline="" 才不會在寫入時出現不該出現的東西。
 
     # 建立Writer物件
     writer = csv.writer(file)
@@ -160,7 +159,7 @@ with open("sum.csv", mode="w", newline="",encoding="utf-8-sig") as file: #newlin
     writer.writerow(['username', 'scrobble_count', 'top_artist', 'top_track'])
     writer.writerow([user, scrobblecnt, top_artist, top_track])
 
-with open("top.csv", mode="w", newline="",encoding="utf-8-sig") as file2: #newline="" 才不會在寫入時出現不該出現的東西。
+with open("out/top_tracks.csv", mode="w", newline="",encoding="utf-8-sig") as file2: #newline="" 才不會在寫入時出現不該出現的東西。
 
     # 建立Writer物件
     writer2 = csv.writer(file2)
