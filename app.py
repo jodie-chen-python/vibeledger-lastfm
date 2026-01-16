@@ -41,7 +41,7 @@ import streamlit as st
 import pandas as pd
 
 # 資料讀取函式
-def load_csv(out_path: str, sample_path: str) -> pd.DataFrame:
+def load_csv(out_path:str, sample_path:str) -> pd.DataFrame:
 
     out_file = Path(out_path)
     sample_file = Path(sample_path)
