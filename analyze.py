@@ -93,7 +93,9 @@ import json
 import json
 import requests
 
-url = "https://raw.githubusercontent.com/jodie-chen-python/vibeledger-lastfm/d1963f27844d765dff6c8ac39a4bbbef45122f17/sample/week_data.sample.json"
+# url = "https://raw.githubusercontent.com/jodie-chen-python/vibeledger-lastfm/d1963f27844d765dff6c8ac39a4bbbef45122f17/sample/week_data.json"
+url = "https://raw.githubusercontent.com/jodie-chen-python/vibeledger-lastfm/refs/heads/main/out/week_data.json"
+
 
 resp = requests.get(url)
 resp.raise_for_status()
