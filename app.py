@@ -34,3 +34,57 @@
 # 完成後請確保：
 # - streamlit run app.py 可以順利啟動
 # - 就算 out/ 還沒有，也能用 sample/ 跑出畫面
+
+
+from pathlib import Path
+import streamlit as st
+import pandas as pd
+
+# 資料讀取函式
+def load_csv(out_path:str, sample_path:str) -> pd.DataFrame:
+
+    out_file = Path(out_path)
+    sample_file = Path(sample_path)
+
+    if out_file.exists():
+        return pd.read_csv(out_file)
+    else:
+        return pd.read_csv(sample_file)
+
+# 讀取資料
+summary_df = load_csv(
+    "out/summary.csv",
+    "sample/summary.sample.csv"
+)
+
+top_tracks_df = load_csv(
+    "out/top_tracks.csv",
+    "sample/top_tracks.sample.csv"
+)
+
+# UI
+st.title("VibeLedger｜歌單心電圖")
+
+summary = summary_df.iloc[0]
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric(
+    label="本週收聽數",
+    value=int(summary["scrobble_count"])
+)
+col2.metric(
+    label="Top Artist",
+    value=summary["top_artist"]
+)
+col3.metric(
+    label="Top Track",
+    value=summary["top_track"]
+)
+
+st.subheader("🎧 Top Tracks")
+
+st.dataframe(
+    top_tracks_df.head(10),
+    width="stretch", height="content"
+)
