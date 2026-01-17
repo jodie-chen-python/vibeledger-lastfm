@@ -1,10 +1,132 @@
 ﻿rank,artist,track,play_count
-1,Daft Punk,One More Time,2
-2,Nujabes,Feather,2
-3,Radiohead,Weird Fishes/Arpeggi,2
-4,Billie Eilish,everything i wanted,1
-5,Joy Division,Love Will Tear Us Apart,1
-6,NewJeans,Super Shy,1
-7,Phoebe Bridgers,Kyoto,1
-8,Taylor Swift,Anti-Hero,1
-9,Unknown Artist,Mystery Track,1
+1,Vertical Horizon,Everything You Want,5
+2,kurayamisaka,cinema paradiso,4
+3,REJAY,Meant to Be,3
+4,REJAY,Stand up,3
+5,Vertical Horizon,Best I Ever Had (Grey Sky Morning),2
+6,REJAY,HAZY (Prod. A.G.O),2
+7,REJAY,Middle of the Night,2
+8,REJAY,Remedy,2
+9,The Spill Canvas,"Polygraph, Right Now!",2
+10,REJAY,Secret,2
+11,REJAY,Shaky,2
+12,Plain White T's,Hey There Delilah,2
+13,REJAY,Let’s Just Be -Japanese ver.-,2
+14,REJAY,Too Late,2
+15,kurayamisaka,farewell,2
+16,kurayamisaka,seasons,2
+17,kurayamisaka,theme (kimi wo omotte iru),2
+18,REJAY,Love you still,2
+19,REJAY,Zen (Intro),1
+20,Remy Bond,Moviestar,1
+21,SafetySuit,Find A Way,1
+22,SafetySuit,Never Stop,1
+23,04 Limited Sazabys,Galapagos II,1
+24,REJAY,Let's Just Be,1
+25,REJAY,Back to You,1
+26,Simple Plan,I'm Just a Kid,1
+27,Noah Rinker,The Pines,1
+28,New Found Glory,My Friends Over You,1
+29,New Found Glory,Kiss Me,1
+30,New Found Glory,All Downhill from Here,1
+31,Motion City Soundtrack,The Future Freaks Me Out,1
+32,Motion City Soundtrack,My Favorite Accident,1
+33,Miracle Tones,Solfeggio Frequencies 528 Hz,1
+34,Miracle Tones,Solfeggio Frequencies 417 Hz,1
+35,Miracle Tones,528 Hz Release Inner Conflict & Struggle,1
+36,Simple Plan,I'd Do Anything,1
+37,Something Corporate,Konstantine,1
+38,Simple Plan,Perfect,1
+39,Simple Plan,What's New Scooby-Doo?,1
+40,kurayamisaka,evergreen,1
+41,go!go!vanillas,Dandelion,1
+42,YUNGBLUD,Zombie,1
+43,Vertical Horizon,You Say,1
+44,Vertical Horizon,Finding Me,1
+45,Timo Krantz,417,1
+46,The Summer Set,Lightning in a Bottle,1
+47,The Starting Line,Island,1
+48,The Spill Canvas,All Over You,1
+49,The Red Jumpsuit Apparatus,Your Guardian Angel - Live,1
+50,The Maine,Black Butterflies and Déjà Vu,1
+51,The Cab,Every Little Lie,1
+52,The Cab,Angel With A Shotgun - Sped Up Version,1
+53,The Cab,Angel With A Shotgun,1
+54,The Audition,You’ve Made Us Conscious,1
+55,The Audition,Warm Me Up,1
+56,The Ataris,In This Diary,1
+57,The All-American Rejects,Gives You Hell,1
+58,Taking Back Sunday,MakeDamnSure,1
+59,Sugarcult,She's the Blade,1
+60,Sugarcult,Do It Alone,1
+61,Sugarcult,Bouncing Off the Walls,1
+62,Something Corporate,Punk Rock Princess,1
+63,Miracle Tones,528 Hz Love Frequency,1
+64,Something Corporate,I Woke Up in a Car,1
+65,Miracle Tones,528 Hz Manifest Your Greatness,1
+66,Miracle Tones,528 Hz Love & Miracles,1
+67,04 Limited Sazabys,Kitchen,1
+68,Haku.,南新町,1
+69,Haku.,BLUE GIRL,1
+70,Gavin DeGraw,Not Over You,1
+71,Gavin DeGraw,Chariot,1
+72,Five for Fighting,The Riddle,1
+73,Five for Fighting,100 Years,1
+74,Every Avenue,Tell Me I'm A Wreck,1
+75,Every Avenue,Only Place I Call Home,1
+76,Every Avenue,Girl Like That,1
+77,Dashboard Confessional,Vindicated,1
+78,Dashboard Confessional,Screaming Infidelities,1
+79,Dashboard Confessional,Don't Wait,1
+80,Dashboard Confessional,As Lovers Go,1
+81,Cosmo's Midnight,Down for You,1
+82,Cartel,Runaway,1
+83,Bowling for Soup,I Ran (So Far Away),1
+84,BAYNK,How Does It Feel?,1
+85,Armor for Sleep,Remember to Feel Real,1
+86,American Hi-Fi,Flavor of the Weak,1
+87,All Time Low,"Dear Maria, Count Me In",1
+88,All Time Low,A Love Like War (feat. Vic Fuentes),1
+89,Alex Warren,Ordinary,1
+90,Addison Rae,Headphones On,1
+91,Acceptance,Take Cover (feat. Martin Johnson),1
+92,04 Limited Sazabys,swim,1
+93,04 Limited Sazabys,mottö,1
+94,04 Limited Sazabys,knife,1
+95,04 Limited Sazabys,Terminal,1
+96,04 Limited Sazabys,"Now here, No where",1
+97,04 Limited Sazabys,Midnight Cruising,1
+98,Haku.,Hitonatsu,1
+99,Haku.,第六感,1
+100,Miracle Tones,528 Hz Heal Golden Chakra,1
+101,Haku.,自由のショート,1
+102,Miracle Tones,528 Hz DNA Repair,1
+103,Miracle Tones,528 Hz Bring Positive Transformation,1
+104,Miracle Tones,528 Hz Anxiety Relief,1
+105,Miracle Tones,417 Hz Undo Emotional Patterns,1
+106,Miracle Tones,417 Hz Undo Damage,1
+107,Miracle Tones,417 Hz Transmutation,1
+108,Miracle Tones,417 Hz Sacral Chakra,1
+109,Miracle Tones,417 Hz Remove Negative Energy,1
+110,Miracle Tones,417 Hz Remove Negative Blocks,1
+111,Miracle Tones,417 Hz Positive Change,1
+112,Miracle Tones,417 Hz New Beginnings,1
+113,Miracle Tones,417 Hz Manifest Positive Energy,1
+114,Miracle Tones,417 Hz Let Go of Mental Blockages,1
+115,Miracle Tones,417 Hz Find Inner Balance,1
+116,Miracle Tones,417 Hz Clear Negative Energy,1
+117,Miracle Tones,417 Hz Cleanse Trauma,1
+118,Matchbox Twenty,Unwell,1
+119,Matchbox Twenty,Real World,1
+120,Matchbook Romance,Surrender,1
+121,Matchbook Romance,Promise,1
+122,Lifehouse,Whatever It Takes,1
+123,Lifehouse,Hanging by a Moment,1
+124,Just Surrender,Our Work of Art,1
+125,Jack's Mannequin,Holiday From Real - 2015 Remastered,1
+126,Jack's Mannequin,Dark Blue - 2015 Remastered,1
+127,Hit the Lights,Speakers Blown,1
+128,Hey Monday,Set Off,1
+129,Hey Monday,How You Love Me Now,1
+130,Haku.,頭の中の宇宙,1
+131,kurayamisaka,ハイウェイ,1
