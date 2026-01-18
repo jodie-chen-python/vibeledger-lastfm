@@ -62,29 +62,52 @@ top_tracks_df = load_csv(
     "sample/top_tracks.sample.csv"
 )
 
+top_tags_df = load_csv(
+    "out/top_tags.csv",
+    "sample/top_tags.sample.csv"
+)
 # UI
 st.title("VibeLedger｜歌單心電圖")
 
 summary = summary_df.iloc[0]
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 col1.metric(
     label="本週收聽數",
     value=int(summary["scrobble_count"])
 )
 col2.metric(
-    label="Top Artist",
+    label="最常收聽藝人p ",
     value=summary["top_artist"]
 )
 col3.metric(
-    label="Top Track",
+    label="最常播放歌曲",
     value=summary["top_track"]
 )
 
-st.subheader("🎧 Top Tracks")
+st.subheader("🎧 本週常見音樂標籤")
+top_tags = list(top_tags_df.columns)
+tag_html = ""
 
+for tag in top_tags:
+    tag_html += f"""
+    <span style="
+        display: inline-block;
+        margin: 6px 10px 6px 0;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background-color: #f1f3f5;
+        font-size: 16px;
+        ">
+        {tag}
+    </span>
+    """
+
+st.markdown(tag_html, unsafe_allow_html=True)
+
+st.subheader("🎧 本週播放排行榜")
 st.dataframe(
-    top_tracks_df.head(10),
-    width="stretch", height="content"
+    top_tracks_df,
+    width="content", height="content"
 )
