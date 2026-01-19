@@ -40,6 +40,8 @@ from pathlib import Path
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(page_title="VibeLedger｜歌單心電圖", layout="wide")
+
 # 資料讀取函式
 def load_csv(out_path:str, sample_path:str) -> pd.DataFrame:
 
@@ -62,29 +64,90 @@ top_tracks_df = load_csv(
     "sample/top_tracks.sample.csv"
 )
 
+top_tags_df = load_csv(
+    "out/top_tags.csv",
+    "sample/top_tags.sample.csv"
+)
 # UI
-st.title("VibeLedger｜歌單心電圖")
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 100%;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
+st.title("VibeLedger｜歌單心電圖")
+st.subheader("用聽歌紀錄讀懂一週的音樂狀態")
 summary = summary_df.iloc[0]
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 col1.metric(
     label="本週收聽數",
     value=int(summary["scrobble_count"])
 )
 col2.metric(
-    label="Top Artist",
+    label="最常收聽藝人",
     value=summary["top_artist"]
 )
 col3.metric(
-    label="Top Track",
+    label="最常播放歌曲",
     value=summary["top_track"]
 )
 
-st.subheader("🎧 Top Tracks")
+col_tracks, col_tags= st.columns(2)
+with col_tracks:
+    st.subheader("🎧 本週播放排行榜")
+    top_tracks = top_tracks_df.rename(columns={
+    "rank": "排名",
+    "artist": "藝人",
+    "track": "歌曲",
+    "play_count": "播放次數"
+    })
 
-st.dataframe(
-    top_tracks_df.head(10),
-    width="stretch", height="content"
-)
+    st.dataframe(
+        top_tracks,
+        width="stretch", height="content",
+        hide_index=True
+    )
+
+with col_tags:
+    st.subheader("🎶 本週常見音樂標籤")
+    top_tags = list(top_tags_df.columns)
+    TAG_COLORS = [
+        "#ffd6a5",
+        "#caffbf",
+        "#bdb2ff",
+        "#9bf6ff",
+        "#ffc6ff",
+        "#fdffb6",
+    ]
+
+    tag_html = ""
+
+    for i, tag in enumerate(top_tags):
+        color = TAG_COLORS[i % len(TAG_COLORS)]
+
+        tag_html += f"""
+        <span style="
+            display: inline-block;
+            margin: 6px 3px 6px 0;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background-color: {color};
+            font-size: 15px;
+            ">
+            {tag}
+        </span>
+        """
+    st.markdown(tag_html, unsafe_allow_html=True)
+    st.caption('''
+    資料來源：Last.fm \n
+    分析區間：最近 7 天
+    ''')
