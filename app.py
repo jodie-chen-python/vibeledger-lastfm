@@ -39,7 +39,6 @@
 from pathlib import Path
 import streamlit as st
 import pandas as pd
-import random
 
 st.set_page_config(page_title="VibeLedger｜歌單心電圖", layout="wide")
 
