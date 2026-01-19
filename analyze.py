@@ -106,7 +106,7 @@ jsonObj = resp.json()
 user = jsonObj['user']["username"]
 scrobblecnt = len(jsonObj['scrobbles'])
 scrobble_info = jsonObj['scrobbles']
-print(type(scrobble_info)) # list, 但是裡面裝的元素是dic
+# print(type(scrobble_info)) # list, 但是裡面裝的元素是dic
 # print(scrobble_info)
 
 from collections import Counter
@@ -120,8 +120,23 @@ track_list = [item["track"] for item in jsonObj["scrobbles"]]
 track_counter = Counter(track_list)
 top_track = track_counter.most_common(1)[0][0]
 
-# print(user, scrobblecnt, top_artist, top_track)
-# print(scrobble_info)
+# 單純取出所有 tags
+tag_list = [item["tags"] for item in jsonObj["scrobbles"]]
+top_list = []
+for t in tag_list:
+    for t2 in t:
+        if t2 != 'untagged':
+            top_list.append(t2)
+
+tag_counter = Counter(top_list)
+# print(tag_counter)
+top_tag = tag_counter.most_common(5)
+result_tag = []
+for u in top_tag:
+    result_tag.append(u[0])
+
+print(result_tag)
+
 
 
 # part2 -- top_tracks.sample.csv
@@ -146,13 +161,16 @@ result_df = track_count[
 # print(result_df)
 
 
+# part3 -- top_tags.csv
 
 
-# 產出 out/summary.csv、out/top_tracks.csv
+
+
+# 產出 out/summary.csv、out/top_tracks.csv、top_tags.csv
 import csv 
 
 # 開啟檔案
-with open("out/summary.csv", mode="w", newline="",encoding="utf-8-sig") as file: #newline="" 才不會在寫入時出現不該出現的東西。
+with open("sum.csv", mode="w", newline="",encoding="utf-8-sig") as file: #newline="" 才不會在寫入時出現不該出現的東西。
 
     # 建立Writer物件
     writer = csv.writer(file)
@@ -161,7 +179,7 @@ with open("out/summary.csv", mode="w", newline="",encoding="utf-8-sig") as file:
     writer.writerow(['username', 'scrobble_count', 'top_artist', 'top_track'])
     writer.writerow([user, scrobblecnt, top_artist, top_track])
 
-with open("out/top_tracks.csv", mode="w", newline="",encoding="utf-8-sig") as file2: #newline="" 才不會在寫入時出現不該出現的東西。
+with open("top.csv", mode="w", newline="",encoding="utf-8-sig") as file2: #newline="" 才不會在寫入時出現不該出現的東西。
 
     # 建立Writer物件
     writer2 = csv.writer(file2)
@@ -175,3 +193,11 @@ with open("out/top_tracks.csv", mode="w", newline="",encoding="utf-8-sig") as fi
             row["track"],
             row["play_count"]
         ])
+
+with open("top_tags.csv", mode="w", newline="",encoding="utf-8-sig") as file3: #newline="" 才不會在寫入時出現不該出現的東西。
+
+    # 建立Writer物件
+    writer3 = csv.writer(file3)
+
+    # (每次)寫入一個列表
+    writer3.writerow(result_tag)
